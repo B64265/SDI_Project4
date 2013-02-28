@@ -68,6 +68,8 @@ var myLibrary = function(){
 			
 		}else if (patternSym == "@"){
 			
+			var emailTest = val.substring(val.indexOf(patternSym), val.lastIndexOf(".")+1);
+			return emailTest;
 			
 		}
 		
@@ -134,3 +136,42 @@ if(checkLenFunc && checkPatternFunc && checkNumeric1 && checkNumeric2 && checkNu
 	
 	console.log("it looks like "+ myNumber + " is not a phone number.");
 }
+
+// Next I will be setting up for the Email Pattern check...
+
+var myEmail = "jeremy@tinyappshack.com"
+
+patternSym = "@";
+
+var startMailCheck = myEmail.indexOf("@");
+
+var endMailCheck = myEmail.lastIndexOf(".");
+
+var endFinalMailCheck = myEmail.length;
+
+var checkMailPatternFunc = newLib.checkPattern(myEmail);
+
+
+//Output for the phone number validation
+
+console.log("I will be checking if " + myEmail + " is an email...")
+
+console.log("Does it match the desired pattern? " + checkMailPatternFunc);
+
+if(checkMailPatternFunc.substring(0, 1) == "@" && checkMailPatternFunc.substring(checkMailPatternFunc.lastIndexOf("."), checkMailPatternFunc.length) == "."){
+	
+	console.log("it looks like "+ myEmail + " is a valid email!");
+	
+}else{
+	
+	console.log("it looks like "+ myEmail + " is not an email. :(");
+}
+
+
+
+
+
+
+
+
+
