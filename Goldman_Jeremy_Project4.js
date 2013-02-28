@@ -39,7 +39,7 @@ var myLibrary = function(){
 		
 	}
 	
-	// Check Pattern Function
+	// Check Pattern Function (for phone and email)
 	
 	var checkPattern = function(val){
 	
@@ -77,12 +77,20 @@ var myLibrary = function(){
 		
 	}
 	
+	var checkWebPattern = function(val){
+		
+		var webTest = val.substring(val.indexOf("h"), val.lastIndexOf(":")+1);
+		return webTest;
+		
+	}
+	
 	
 	// Return Object
 	return{
 		"checkNumeric": checkNumeric,
 		"checkLength" : checkLength,
-		"checkPattern" : checkPattern
+		"checkPattern" : checkPattern,
+		"checkWebPattern" : checkWebPattern
 	}
 }
 
@@ -168,9 +176,28 @@ if(checkMailPatternFunc.substring(0, 1) == "@" && checkMailPatternFunc.substring
 }
 
 
+// Next I will be checking if a string is a valid URL...
+// Interestingly I had used this exact idea to find out
+// if I could shorten a URL in my very first iOS app I ever wrote (called Updtr).
+// I was very proud of myself for it back then... oh to be young again.
+
+var myURL = "http://www.tinyappshack.com";
+
+var checkWebPatternFunc = newLib.checkWebPattern(myURL);
 
 
+console.log("I will be checking if " + myURL + " is web address...")
 
+console.log("Does it match the desired pattern? " + checkWebPatternFunc);
+
+if(checkWebPatternFunc.substring(0, 1) == "h" && checkWebPatternFunc.substring(checkWebPatternFunc.lastIndexOf(":"), checkWebPatternFunc.length) == ":"){
+	
+	console.log("it looks like "+ myEmail + " is a valid web address!");
+	
+}else{
+	
+	console.log("it looks like "+ myEmail + " is not an web address. :(");
+}
 
 
 
