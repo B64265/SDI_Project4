@@ -9,6 +9,86 @@
 
 var myLibrary = function(){
 	
+	
+	var phoneNumValidation = function(val, desiredLength, patternSym){
+		
+		if(val.length === desiredLength){
+			
+			//return true;
+			
+			var patternIndex = [];
+	
+			var strLen = val.length;
+			for(var i = 0; i <=strLen; i++){
+				
+				if(val.substring(i, i+1) === patternSym){
+					
+					patternIndex.push(i);
+				}
+				
+			}
+			
+			if(patternSym == "-"){
+				
+				if(patternIndex[0] == 3 && patternIndex[1] == 7){
+				
+					//return true;
+					
+					var startNumCheck = val.indexOf(patternSym);
+					var endNumCheck = val.lastIndexOf(patternSym);
+					var endFinalNumCheck = val.length;
+					var checkNumeric1 = val.substring( 0 , startNumCheck);
+					var checkNumeric2 = val.substring( 4 , endNumCheck);
+					var checkNumeric3 = val.substring( endNumCheck+1 , endFinalNumCheck);
+
+					if(isNaN(checkNumeric1)){
+			
+						return false;
+						
+					}else{
+						
+						//return true;
+						if(isNaN(checkNumeric2)){
+				
+							return false;
+							
+						}else{
+							
+							//return true;
+							if(isNaN(checkNumeric3)){
+					
+								return false;
+								
+							}else{
+								
+								return true;
+								
+							}
+							
+						}
+						
+					}
+				
+				}else{
+				
+					return false;
+				}
+				
+			}else {
+			
+				return false;
+			
+			}
+		
+			
+		}else{
+			
+			return false;
+		}
+		
+		
+	}
+	
 	// Check Numeric Function
 	var checkNumeric = function(val){
 		
@@ -39,7 +119,7 @@ var myLibrary = function(){
 		
 	};
 	
-	// Check Pattern Function (for phone and email)
+	// Check Pattern Function ( email)
 	
 	var checkPattern = function(val, patternSym){
 	
@@ -184,7 +264,8 @@ var myLibrary = function(){
 		"checkWebPattern" : checkWebPattern,
 		"upChar" : upChar,
 		"toDecimalPoint" : toDecimalPoint,
-		"strToNum" : strToNum
+		"strToNum" : strToNum,
+		"phoneNumValidation" : phoneNumValidation
 
 	}
 };
@@ -195,50 +276,11 @@ var newLib = new myLibrary();
 
 // This is the Phone Number Test variables.  I declared some them here to keep things clean
 // Otherwise it would look like a mess with all of my inputs inside of the function calls
-// 
-
-var myNumber = "224-366-7016";
-
+var myNumber = "847-697-1492";
 var patternSym = "-";
+console.log(newLib.phoneNumValidation(myNumber, 12, patternSym));
 
-var startNumCheck = myNumber.indexOf(patternSym);
 
-var endNumCheck = myNumber.lastIndexOf(patternSym);
-
-var endFinalNumCheck = myNumber.length;
-
-var checkLenFunc = newLib.checkLength(myNumber, 12);
-
-var checkPatternFunc = newLib.checkPattern(myNumber, patternSym);
-
-var checkNumeric1 = newLib.checkNumeric(myNumber.substring( 0 , startNumCheck));
-
-var checkNumeric2 = newLib.checkNumeric(myNumber.substring( 4 , endNumCheck));
-
-var checkNumeric3 = newLib.checkNumeric(myNumber.substring( endNumCheck+1 , endFinalNumCheck));
-
-//Output for the phone number validation
-
-console.log("I will be checking if " + myNumber + " is a phone number.")
-
-console.log("Does this length match the desired length? " + checkLenFunc);
-
-console.log("Does it match the desired pattern? " + checkPatternFunc);
-
-console.log("Is section 1 a number? " + checkNumeric1);
-
-console.log("Is section 2 a number? " + checkNumeric2);
-
-console.log("Is section 3 a number? " + checkNumeric3);
-
-if(checkLenFunc && checkPatternFunc && checkNumeric1 && checkNumeric2 && checkNumeric3 == true){
-	
-	console.log("It looks like "+ myNumber + " is a valid phone number!");
-	
-}else{
-	
-	console.log("It looks like "+ myNumber + " is not a phone number.");
-}
 
 // Next I will be setting up for the Email Pattern check...
 // and output the result
@@ -266,11 +308,15 @@ var patternSym = " ";
 var upCharFunc = newLib.upChar(myWord, patternSym);
 console.log("Let's see what " + myWord + " looks like with caps on the first letter of each word --> ", upCharFunc);
 
+
+
 //Next will be the format a number function!
 var myNumber = 3.14159;
 var desiredDecimals = 2;
 var toDecFunc = newLib.toDecimalPoint(myNumber, desiredDecimals);
 console.log("Lets see how the fixed decimal function works! The number is " + myNumber + " --> ", toDecFunc);
+
+
 
 // For my next trick, I'll magically transform a string to a Number! (ooohhhh, ahhhhh)
 var myNumString = "42";
