@@ -37,19 +37,27 @@ var myLibrary = function(){
 	
 	// Check String Function
 	
-	var checkString = function(val){
+	var checkPattern = function(val){
+	
+	var patternIndex = [];
 	
 		var strLen = val.length;
 		for(var i = 0; i <=strLen; i++){
 			
 			if(val.substring(i, i+1) === "-"){
 				
-				return i;
+				patternIndex.push(i);
 			}
 			
 		}
-	
-	
+		if(patternIndex[0] == 3 && patternIndex[1] == 7){
+			
+			return true
+		}else{
+			
+			return false;
+		}
+		
 	}
 	
 	
@@ -57,8 +65,8 @@ var myLibrary = function(){
 	// Return Object
 	return{
 		"checkNumeric": checkNumeric,
-		"checkLength": checkLength
-		
+		"checkLength" : checkLength,
+		"checkPattern" : checkPattern
 	}
 }
 
@@ -68,5 +76,7 @@ var newLib = new myLibrary();
 console.log("Is this a number? "+newLib.checkNumeric(3));
 
 console.log("Does this length match the desired length? " + newLib.checkLength("224-366-7016", 12));
+
+console.log("This is the return for checkPattern:" + newLib.checkPattern("224-366-7016"));
 
 
