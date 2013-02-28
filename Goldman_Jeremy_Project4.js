@@ -2,10 +2,6 @@
 // SDI Term:1302
 // Project 4
 // This Library is gonna rock ;)
-//
-// This library is going to have all of the more generic functions,
-// And my specific calls and data for the problem will be at the bottom.
-// I also split each funciton into its own output so that you can see it works. :)
 
 var myLibrary = function(){
 	
@@ -53,15 +49,17 @@ var myLibrary = function(){
 							return false;
 							
 						}else{
+							var validOutput = "It looks like "+ val + " is a valid phone number!";
+							var invalidOutput = "It looks like "+ val + " is not a phone number. :(";
 							
 							//return true;
 							if(isNaN(checkNumeric3)){
 					
-								return false;
+								return invalidOutput;
 								
 							}else{
 								
-								return true;
+								return validOutput;
 								
 							}
 							
@@ -89,36 +87,6 @@ var myLibrary = function(){
 		
 	}
 	
-	// Check Numeric Function
-	var checkNumeric = function(val){
-		
-		if(isNaN(val)){
-			
-			return false;
-			
-		}else{
-			
-			return true;
-			
-		}
-		
-	};
-	
-	
-	//Check length
-	var checkLength = function(val, desiredLength){
-	
-		if(val.length === desiredLength){
-			
-			return true;
-			
-		}else{
-			
-			return false;
-		}
-		
-	};
-	
 	// Check Pattern Function ( email)
 	
 	var checkPattern = function(val, patternSym){
@@ -135,18 +103,7 @@ var myLibrary = function(){
 			
 		}
 		
-		if(patternSym == "-"){
-			
-			if(patternIndex[0] == 3 && patternIndex[1] == 7){
-			
-				return true;
-			
-			}else{
-			
-				return false;
-			}
-			
-		}else if (patternSym == "@"){
+		if(patternSym == "@"){
 			
 			var emailTest = val.substring(val.indexOf(patternSym), val.lastIndexOf(".")+1);
 			var validOutput = "It looks like "+ val + " is a valid email!";
@@ -160,8 +117,10 @@ var myLibrary = function(){
 	
 					return invalidOutput;
 				}
-
 			
+		}else{
+			
+			return false;
 		}
 		
 		
@@ -258,8 +217,6 @@ var myLibrary = function(){
 	
 	// Return Object
 	return{
-		"checkNumeric": checkNumeric,
-		"checkLength" : checkLength,
 		"checkPattern" : checkPattern,
 		"checkWebPattern" : checkWebPattern,
 		"upChar" : upChar,
@@ -298,7 +255,7 @@ console.log(checkMailPatternFunc);
 // I was very proud of myself for it back then... oh to be young again.
 var myURL = "http://www.tinyappshack.com";
 var checkWebPatternFunc = newLib.checkWebPattern(myURL);
-console.log("I will be checking if " + myURL + " is a valid web address...")
+console.log("I will be checking if " + myURL + " is a valid web address...");
 console.log(checkWebPatternFunc);
 
 
