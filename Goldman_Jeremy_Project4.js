@@ -41,7 +41,7 @@ var myLibrary = function(){
 	
 	// Check Pattern Function (for phone and email)
 	
-	var checkPattern = function(val){
+	var checkPattern = function(val, patternSym){
 	
 	var patternIndex = [];
 	
@@ -69,7 +69,18 @@ var myLibrary = function(){
 		}else if (patternSym == "@"){
 			
 			var emailTest = val.substring(val.indexOf(patternSym), val.lastIndexOf(".")+1);
-			return emailTest;
+			var validOutput = "It looks like "+ val + " is a valid email!";
+			var invalidOutput = "It looks like "+ val + " is not an email. :(";
+			
+			if(emailTest.substring(0, 1) == "@" && emailTest.substring(emailTest.lastIndexOf("."), emailTest.length) == "."){
+	
+					return validOutput;
+	
+				}else{
+	
+					return invalidOutput;
+				}
+
 			
 		}
 		
@@ -77,10 +88,42 @@ var myLibrary = function(){
 		
 	}
 	
+	//Check for valid URL
 	var checkWebPattern = function(val){
 		
 		var webTest = val.substring(val.indexOf("h"), val.lastIndexOf(":")+1);
-		return webTest;
+		
+		var validOutput = "It looks like "+ val + " is a valid web address!"
+		
+		var invalidOutput = "It looks like "+ val + " is not an web address. :("
+		
+		if(webTest == "http:" || webTest == "https:"){
+	
+				return validOutput;
+	
+			}else{
+	
+				return invalidOutput;
+			}
+		
+	}
+	
+	
+	//Uppercase Character Function
+	var upChar = function(val, patternSym){
+		
+		var patternIndex = [];
+	
+		var strLen = val.length;
+		for(var i = 0; i <=strLen; i++){
+			
+			if(val.substring(i, i+1) === patternSym){
+				
+				patternIndex.push(i);
+			}
+			
+		}
+
 		
 	}
 	
@@ -90,7 +133,9 @@ var myLibrary = function(){
 		"checkNumeric": checkNumeric,
 		"checkLength" : checkLength,
 		"checkPattern" : checkPattern,
-		"checkWebPattern" : checkWebPattern
+		"checkWebPattern" : checkWebPattern,
+		"upChar" : upChar
+
 	}
 }
 
@@ -106,15 +151,15 @@ var myNumber = "224-366-7016";
 
 var patternSym = "-";
 
-var startNumCheck = myNumber.indexOf("-");
+var startNumCheck = myNumber.indexOf(patternSym);
 
-var endNumCheck = myNumber.lastIndexOf("-");
+var endNumCheck = myNumber.lastIndexOf(patternSym);
 
 var endFinalNumCheck = myNumber.length;
 
 var checkLenFunc = newLib.checkLength(myNumber, 12);
 
-var checkPatternFunc = newLib.checkPattern(myNumber);
+var checkPatternFunc = newLib.checkPattern(myNumber, patternSym);
 
 var checkNumeric1 = newLib.checkNumeric(myNumber.substring( 0 , startNumCheck));
 
@@ -138,42 +183,26 @@ console.log("Is section 3 a number? " + checkNumeric3);
 
 if(checkLenFunc && checkPatternFunc && checkNumeric1 && checkNumeric2 && checkNumeric3 == true){
 	
-	console.log("it looks like "+ myNumber + " is a valid phone number!");
+	console.log("It looks like "+ myNumber + " is a valid phone number!");
 	
 }else{
 	
-	console.log("it looks like "+ myNumber + " is not a phone number.");
+	console.log("It looks like "+ myNumber + " is not a phone number.");
 }
 
 // Next I will be setting up for the Email Pattern check...
+// and output the result
 
 var myEmail = "jeremy@tinyappshack.com"
 
 patternSym = "@";
 
-var startMailCheck = myEmail.indexOf("@");
+var checkMailPatternFunc = newLib.checkPattern(myEmail, patternSym);
 
-var endMailCheck = myEmail.lastIndexOf(".");
+console.log("I will be checking if " + myEmail + " is an email...");
 
-var endFinalMailCheck = myEmail.length;
+console.log(checkMailPatternFunc);
 
-var checkMailPatternFunc = newLib.checkPattern(myEmail);
-
-
-//Output for the phone number validation
-
-console.log("I will be checking if " + myEmail + " is an email...")
-
-console.log("Does it match the desired pattern? " + checkMailPatternFunc);
-
-if(checkMailPatternFunc.substring(0, 1) == "@" && checkMailPatternFunc.substring(checkMailPatternFunc.lastIndexOf("."), checkMailPatternFunc.length) == "."){
-	
-	console.log("it looks like "+ myEmail + " is a valid email!");
-	
-}else{
-	
-	console.log("it looks like "+ myEmail + " is not an email. :(");
-}
 
 
 // Next I will be checking if a string is a valid URL...
@@ -185,19 +214,23 @@ var myURL = "http://www.tinyappshack.com";
 
 var checkWebPatternFunc = newLib.checkWebPattern(myURL);
 
+console.log("I will be checking if " + myURL + " is a valid web address...")
 
-console.log("I will be checking if " + myURL + " is web address...")
+console.log(checkWebPatternFunc);
 
-console.log("Does it match the desired pattern? " + checkWebPatternFunc);
 
-if(checkWebPatternFunc.substring(0, 1) == "h" && checkWebPatternFunc.substring(checkWebPatternFunc.lastIndexOf(":"), checkWebPatternFunc.length) == ":"){
-	
-	console.log("it looks like "+ myEmail + " is a valid web address!");
-	
-}else{
-	
-	console.log("it looks like "+ myEmail + " is not an web address. :(");
-}
+//  Next I will be making the first letter of each word upper-case
+var myWord = "tiny app shack";
+
+var patternSym = " ";
+
+var upCharFunc = newLib.upChar(myWord, patternSym);
+
+console.log(upCharFunc);
+
+
+
+
 
 
 
