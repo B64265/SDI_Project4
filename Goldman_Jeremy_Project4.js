@@ -198,6 +198,9 @@ var myLibrary = function(){
 		return number;
 	};
 	
+	
+	//String to Number Conversion Function
+	
 	var strToNum = function(str){
 	
 		var number = parseInt(str);
